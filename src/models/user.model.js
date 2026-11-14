@@ -11,21 +11,14 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
+        unique: true
     },
 
     // Email
     email: {
         type: String,
         required: true,
-        unique: true,
-    },
-
-    // Password Hash
-    passwordHash: {
-        type: String,
-        required: true,
-        select: false
+        unique: true
     },
 
     // Email Verified
@@ -34,9 +27,18 @@ const userSchema = new mongoose.Schema({
         default: false
     },
 
+    // Role
     role: {
         type: String,
+        enum: Object.values(USER_ROLE),
         default: USER_ROLE.USER
+    },
+
+    // Password Hash
+    passwordHash: {
+        type: String,
+        required: true,
+        select: false
     },
 
     // Token Version
@@ -68,10 +70,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         select: false
     }
-
-}, {
-    timestamps: true
-});
+}, { timestamps: true });
 
 // User Model
 const User = mongoose.model('User', userSchema);
