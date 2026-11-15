@@ -1,8 +1,8 @@
-// Environment
-import env from './env.js';
-
 // Dependencies
 import mongoose from 'mongoose';
+
+// Environment
+import env from './env.js';
 
 // Logger
 import * as logger from '../lib/logger.js';
@@ -26,18 +26,14 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // Connect Database
-const connectDatabase = async () => {
+export const connect = async () => {
 
     const start = Date.now();
 
-    try {
-        await mongoose.connect(env.MONGO_URI, CONNECTION_OPTIONS);
-        logger.success('DATABASE', `Connected to "${mongoose.connection.name}"`, `${Date.now() - start}ms`);
-    } catch (error) {
-        logger.error('DATABASE', `Failed to connect: ${error.message}`);
-        throw error;
-    }
+    await mongoose.connect(env.MONGO_URI, CONNECTION_OPTIONS);
+
+    logger.success('DATABASE', `Connected to "${mongoose.connection.name}"`, `${Date.now() - start}ms`);
 };
 
-// Export Connect Database
-export default connectDatabase;
+// Disconnect Database
+export const disconnect = () => mongoose.disconnect();

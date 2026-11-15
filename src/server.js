@@ -27,7 +27,8 @@ process.on('uncaughtException', (error) => {
 // Connect Database
 try {
     await database.connect();
-} catch {
+} catch (error) {
+    logger.error('DATABASE', `Failed to connect: ${error.message}`);
     process.exit(1);
 }
 
@@ -53,7 +54,7 @@ const shutdown = (signal) => {
 
     server.close(async () => {
         await database.disconnect();
-        logger.success('SERVER', 'Shut down cleanly.');
+        logger.success('SERVER', 'Shut down executed.');
         process.exit(0);
     });
 };
