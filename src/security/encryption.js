@@ -2,7 +2,7 @@
 const crypto = require('crypto');
 
 // Environment
-const env = require('./config/env');
+const env = require('../config/env');
 
 // Settings
 const IV_LENGTH = 12;

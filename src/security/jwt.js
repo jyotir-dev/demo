@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 // Environment
-const env = require('./config/env');
+const env = require('../config/env');
 
 // Constants
 const JWT_SECRET = env.JWT_SECRET;
