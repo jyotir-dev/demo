@@ -1,20 +1,23 @@
 // Dependencies
 const nodemailer = require('nodemailer');
 
+// Environment
+const env = require('../config/env');
+
 // Logger
 const logger = require('../lib/logger')
 
 // Transporter
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_PORT === '465',
+    host: env.SMTP_HOST,
+    port: Number(env.SMTP_PORT),
+    secure: env.SMTP_PORT === '465',
     pool: true,
     connectionTimeout: 10000,
     socketTimeout: 20000,
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
+        user: env.SMTP_USER,
+        pass: env.SMTP_PASS
     }
 });
 
@@ -22,7 +25,7 @@ const transporter = nodemailer.createTransport({
 exports.sendEmail = ({ to, subject, html, text }) => {
 
     transporter.sendMail({
-        from: process.env.EMAIL_FROM,
+        from: env.EMAIL_FROM,
         to,
         subject,
         html,
