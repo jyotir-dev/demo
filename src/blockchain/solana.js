@@ -9,17 +9,17 @@ const {
     sendAndConfirmTransaction
 } = require('@solana/web3.js');
 
+// Environment
+const env = require('../config/env');
+
 // Logger
 const logger = require('../lib/logger');
 
 // Security
 const encryption = require('../security/encryption');
 
-// Constants
-const COMMITMENT = process.env.SOLANA_COMMITMENT || 'confirmed';
-
 // Connection
-const connection = new Connection(process.env.SOLANA_RPC_URL, COMMITMENT);
+const connection = new Connection(env.SOLANA_RPC_URL, COMMITMENT);
 
 // To Lamports
 exports.toLamports = (sol) => BigInt(Math.round(sol * LAMPORTS_PER_SOL));
@@ -98,7 +98,7 @@ exports.transfer = async (encryptedPrivateKey, destination) => {
     }
 
     return sendAndConfirmTransaction(connection, buildTransaction(lamports), [sender], {
-        commitment: COMMITMENT,
+        commitment: env.COMMITMENT,
         maxRetries: 3
     });
 };
