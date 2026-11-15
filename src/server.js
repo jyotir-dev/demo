@@ -1,8 +1,8 @@
-// Environment
-import env from './config/env.js';
-
 // Express App
 import app from './app.js';
+
+// Environment
+import env from './config/env.js';
 
 // Logger
 import * as logger from './lib/logger.js';
