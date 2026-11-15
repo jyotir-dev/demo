@@ -187,7 +187,6 @@ exports.respond = async (user, params, body) => {
         throw new ForbiddenError('You cannot respond to an escrow you created.', 'ESCROW_ACCESS_DENIED');
     }
 
-    // Deny
     if (action === ESCROW_ACTION.DENY) {
 
         const denied = await Escrow.findOneAndUpdate(
@@ -215,7 +214,6 @@ exports.respond = async (user, params, body) => {
         };
     }
 
-    // Accept
     const escrowWallet = await solana.create();
 
     const accepted = await Escrow.findOneAndUpdate(
@@ -310,7 +308,6 @@ exports.withdraw = async (user, params, body) => {
         throw new ConflictError('Funds have already been withdrawn.', 'ESCROW_ALREADY_WITHDRAWN');
     }
 
-    // Claim
     const claimed = await Escrow.findOneAndUpdate(
         {
             _id: escrow._id,
@@ -324,7 +321,6 @@ exports.withdraw = async (user, params, body) => {
         throw new ConflictError('Escrow is not available for withdrawal.', 'ESCROW_NOT_RELEASED');
     }
 
-    // Transfer
     let signature;
 
     try {
@@ -340,7 +336,6 @@ exports.withdraw = async (user, params, body) => {
         throw error;
     }
 
-    // Complete
     await Escrow.updateOne(
         {
             _id: escrow._id,

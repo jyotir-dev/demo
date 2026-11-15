@@ -1,6 +1,5 @@
 // API Error
 class ApiError extends Error {
-    // Constructor
     constructor(statusCode, message, code) {
         super(message);
         this.name = this.constructor.name;
