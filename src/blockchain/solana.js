@@ -19,7 +19,7 @@ const logger = require('../lib/logger');
 const encryption = require('../security/encryption');
 
 // Connection
-const connection = new Connection(env.SOLANA_RPC_URL, COMMITMENT);
+const connection = new Connection(env.SOLANA_RPC_URL, env.COMMITMENT);
 
 // To Lamports
 exports.toLamports = (sol) => BigInt(Math.round(sol * LAMPORTS_PER_SOL));
