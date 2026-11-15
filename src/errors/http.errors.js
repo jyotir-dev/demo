@@ -1,4 +1,4 @@
-// Api Error
+// API Error
 const ApiError = require('./api.error');
 
 // Bad Request Error
@@ -43,7 +43,7 @@ class TooManyRequestsError extends ApiError {
     }
 }
 
-// Export Http Errors
+// Export HTTP Errors
 module.exports = {
     BadRequestError,
     UnauthorizedError,

@@ -1,4 +1,4 @@
-// Api Error
+// API Error
 class ApiError extends Error {
     // Constructor
     constructor(statusCode, message, code) {
@@ -10,5 +10,5 @@ class ApiError extends Error {
     }
 }
 
-// Export Api Error
+// Export API Error
 module.exports = ApiError;

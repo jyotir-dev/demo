@@ -1,8 +1,8 @@
-// Auth Cookie
-const authCookie = require('../utils/auth-cookie');
-
 // Catch Async
 const catchAsync = require('../utils/catch-async');
+
+// Auth Cookie
+const authCookie = require('../utils/auth-cookie');
 
 // Services
 const authService = require('../services/auth.service');

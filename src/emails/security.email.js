@@ -1,7 +1,7 @@
 // Layout
 const renderEmail = require('./layout.email');
 
-// Changed At (shown in UTC so it reads the same for everyone)
+// Changed At
 const formatChangedAt = () => new Date().toLocaleString('en-GB', {
     timeZone: 'UTC',
     day: '2-digit',

@@ -1,10 +1,10 @@
-// Fonts (SF Pro on Apple devices, Inter where available, native system fonts elsewhere)
+// Fonts
 const FONT = {
     display: `'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
     text: `'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`
 };
 
-// Colors (Apple's graphite dark palette, with Kairo's lavender as the only accent)
+// Colors
 const COLOR = {
     page: '#111113',
     card: '#1a1a1d',
@@ -21,7 +21,7 @@ const COLOR = {
     buttonText: '#000000'
 };
 
-// Orb (Kairo's aurora colours fused into a flat, fluid circle; Outlook draws a gradient circle, clients without gradients show solid indigo)
+// Orb
 const ORB = {
     color: '#4338ca',
     image: [
@@ -42,10 +42,10 @@ const escape = (value) => String(value)
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 
-// Format (escapes the text, then turns **words** into bold)
+// Format
 const format = (value) => escape(value).replace(/\*\*(.+?)\*\*/g, `<strong style="font-weight: 600; color: ${COLOR.strong};">$1</strong>`);
 
-// Plain (removes the bold markers for the text version)
+// Plain
 const plain = (value) => String(value).replace(/\*\*(.+?)\*\*/g, '$1');
 
 // Render HTML
@@ -60,7 +60,6 @@ const renderHTML = ({ preheader, heading, paragraphs, points = [], details = [],
                                                 </td>
                                             </tr>`).join('');
 
-    // Grouped list, like an inset table in iOS Settings
     const pointRows = points.length ? `
                                             <tr>
                                                 <td style="padding-bottom: 20px;">
@@ -73,7 +72,6 @@ const renderHTML = ({ preheader, heading, paragraphs, points = [], details = [],
                                                 </td>
                                             </tr>` : '';
 
-    // Details panel: a label on the left and its value on the right, in the same grouped style
     const detailRows = details.length ? `
                                             <tr>
                                                 <td style="padding-bottom: 20px;">
