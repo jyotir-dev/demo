@@ -1,12 +1,10 @@
-// Dependencies
-import bcrypt from 'bcrypt';
-
 // Models
 import User from '../models/user.model.js';
 
 // Security
 import * as JWT from '../security/jwt.js';
 import * as Token from '../security/token.js';
+import * as Password from '../security/password.js';
 
 // Mailers
 import * as authMailer from '../mailers/auth.mailer.js';
@@ -16,12 +14,8 @@ import { BadRequestError, UnauthorizedError, ConflictError } from '../errors/htt
 
 // Constants
 const TOKEN_BYTES = 32;
-const BCRYPT_ROUNDS = 12;
 const RESET_TOKEN_TTL = 60 * 60 * 1000;
 const VERIFICATION_TOKEN_TTL = 24 * 60 * 60 * 1000;
-
-// Dummy Hash
-const DUMMY_HASH = bcrypt.hashSync('kairo-dummy-password', BCRYPT_ROUNDS);
 
 // Signup
 export const signup = async (body) => {
@@ -37,7 +31,7 @@ export const signup = async (body) => {
         throw new ConflictError('Username or email already exists.', 'USER_ALREADY_EXISTS');
     }
 
-    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+    const passwordHash = await Password.hash(password);
     const rawToken = Token.generate(TOKEN_BYTES);
     const tokenHash = Token.hash(rawToken);
 
@@ -75,7 +69,7 @@ export const login = async (body) => {
     const password = body.password;
 
     const user = await User.findOne({ username }).select('+passwordHash');
-    const passwordMatch = await bcrypt.compare(password, user ? user.passwordHash : DUMMY_HASH);
+    const passwordMatch = await Password.verify(password, user?.passwordHash);
 
     if (!user) {
         throw new UnauthorizedError('Invalid username or password.', 'INVALID_CREDENTIALS');
@@ -140,19 +134,19 @@ export const changePassword = async (user, body) => {
         throw new UnauthorizedError('User no longer exists.', 'USER_NOT_FOUND');
     }
 
-    const passwordMatch = await bcrypt.compare(currentPassword, account.passwordHash);
+    const passwordMatch = await Password.verify(currentPassword, account.passwordHash);
 
     if (!passwordMatch) {
         throw new BadRequestError('Current password is incorrect.', 'INVALID_CURRENT_PASSWORD');
     }
 
-    const samePassword = await bcrypt.compare(newPassword, account.passwordHash);
+    const samePassword = await Password.verify(newPassword, account.passwordHash);
 
     if (samePassword) {
         throw new BadRequestError('New password must be different from the current password.', 'PASSWORD_REUSED');
     }
 
-    const passwordHash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
+    const passwordHash = await Password.hash(newPassword);
 
     const updatedUser = await User.findOneAndUpdate(
         {
@@ -288,7 +282,7 @@ export const resetPassword = async (body) => {
     const password = body.password;
 
     const tokenHash = Token.hash(token);
-    const passwordHash = await bcrypt.hash(password, BCRYPT_ROUNDS);
+    const passwordHash = await Password.hash(password);
 
     const user = await User.findOneAndUpdate(
         {
