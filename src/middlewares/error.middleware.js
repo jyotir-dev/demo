@@ -1,5 +1,5 @@
 // Errors
-const ApiError = require('../errors/api.error');
+import ApiError from '../errors/api.error.js';
 
 // Body Errors
 const BODY_ERRORS = {
@@ -18,7 +18,7 @@ const BODY_ERRORS = {
 // Handle Error
 function handleError() {
     return function handleError(error, req, res, next) {
-        
+
         if (res.headersSent) {
             return next(error);
         }
@@ -51,5 +51,5 @@ function handleError() {
     };
 }
 
-// Export Middleware
-module.exports = handleError;
+// Export Handle Error
+export default handleError;

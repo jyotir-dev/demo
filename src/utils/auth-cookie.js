@@ -1,5 +1,5 @@
 // Environment
-const env = require('../config/env');
+import env from '../config/env.js';
 
 // Cookie Name
 const COOKIE_NAME = 'token';
@@ -13,11 +13,11 @@ const COOKIE_OPTIONS = {
 };
 
 // Set Auth Cookie
-exports.setAuthCookie = (res, token) => {
+export const setAuthCookie = (res, token) => {
     res.cookie(COOKIE_NAME, token, COOKIE_OPTIONS);
 };
 
 // Clear Auth Cookie
-exports.clearAuthCookie = (res) => {
+export const clearAuthCookie = (res) => {
     res.clearCookie(COOKIE_NAME, COOKIE_OPTIONS);
 };

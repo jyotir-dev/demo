@@ -1,8 +1,8 @@
 // Dependencies
-const expressRateLimit = require('express-rate-limit');
+import expressRateLimit from 'express-rate-limit';
 
 // Errors
-const { TooManyRequestsError } = require('../errors/http.errors');
+import { TooManyRequestsError } from '../errors/http.errors.js';
 
 // Handle Rate Limited
 function handleRateLimited(req, res, next, options) {
@@ -22,5 +22,5 @@ function rateLimit({ windowMs, limit, message, skipSuccessfulRequests = false })
     });
 }
 
-// Export Middleware
-module.exports = rateLimit;
+// Export Rate Limit
+export default rateLimit;

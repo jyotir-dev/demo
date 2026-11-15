@@ -1,10 +1,10 @@
 // Errors
-const { ForbiddenError } = require('../errors/http.errors');
+import { ForbiddenError } from '../errors/http.errors.js';
 
 // Require Verified
 function requireVerified() {
     return function requireVerified(req, res, next) {
-        
+
         if (!req.user.emailVerified) {
             return next(new ForbiddenError('Please verify your email address to continue.', 'EMAIL_NOT_VERIFIED'));
         }
@@ -13,5 +13,5 @@ function requireVerified() {
     };
 }
 
-// Export Middleware
-module.exports = requireVerified;
+// Export Require Verified
+export default requireVerified;

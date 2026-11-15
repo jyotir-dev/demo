@@ -231,5 +231,5 @@ const renderEmail = (content) => ({
     text: renderText(content)
 });
 
-// Export Layout
-module.exports = renderEmail;
+// Export Render Email
+export default renderEmail;

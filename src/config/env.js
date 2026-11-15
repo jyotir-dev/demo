@@ -1,6 +1,6 @@
 // Dependencies
-const { z } = require('zod');
-const dotenv = require('dotenv');
+import { z } from 'zod';
+import dotenv  from 'dotenv';
 
 // Load Environment File
 dotenv.config({ quiet: true });
@@ -36,4 +36,4 @@ if (!result.success) {
 const env = Object.freeze(result.data);
 
 // Export Environment
-module.exports = env;
+export default env;

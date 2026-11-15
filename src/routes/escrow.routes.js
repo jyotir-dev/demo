@@ -1,23 +1,23 @@
 // Dependencies
-const express = require('express');
+import express from 'express';
+
+// Limits
+import * as escrowLimits from '../limits/escrow.limits.js';
+
+// Validators
+import * as escrowValidator from '../validators/escrow.validator.js';
+
+// Controllers
+import * as escrowController from '../controllers/escrow.controller.js';
+
+// Middlewares
+import requireAuth from '../middlewares/auth.middleware.js';
+import rateLimit from '../middlewares/ratelimit.middleware.js';
+import validateRequest from '../middlewares/validation.middleware.js';
+import requireVerified from '../middlewares/verification.middleware.js';
 
 // Express Router
 const router = express.Router();
-
-// Limits
-const escrowLimits = require('../limits/escrow.limits');
-
-// Validators
-const escrowValidator = require('../validators/escrow.validator');
-
-// Controllers
-const escrowController = require('../controllers/escrow.controller');
-
-// Middlewares
-const requireAuth = require('../middlewares/auth.middleware');
-const rateLimit = require('../middlewares/ratelimit.middleware');
-const validateRequest = require('../middlewares/validation.middleware');
-const requireVerified = require('../middlewares/verification.middleware');
 
 // Escrow Routes
 router.post(
@@ -25,11 +25,12 @@ router.post(
     rateLimit(escrowLimits.create),
     requireAuth(),
     requireVerified(),
-    validateRequest(escrowValidator.create), 
+    validateRequest(escrowValidator.create),
     escrowController.create
 );
 
-router.get('/escrows',
+router.get(
+    '/escrows',
     requireAuth(),
     escrowController.escrows
 );
@@ -66,5 +67,5 @@ router.patch(
     escrowController.withdraw
 );
 
-// Export Router
-module.exports = router;
+// Export Escrow Routes
+export default router;

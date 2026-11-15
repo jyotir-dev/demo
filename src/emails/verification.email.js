@@ -1,8 +1,8 @@
 // Layout
-const renderEmail = require('./layout.email');
+import renderEmail from './layout.email.js';
 
 // Verification Email
-module.exports = ({ user, verificationURL }) => ({
+const verificationEmail = ({ user, verificationURL }) => ({
     subject: 'Verify your Kairo account',
     ...renderEmail({
         preheader: 'Confirm your email to finish setting up your Kairo account.',
@@ -23,3 +23,6 @@ module.exports = ({ user, verificationURL }) => ({
         recipient: user.email
     })
 });
+
+// Export Verification Email
+export default verificationEmail;

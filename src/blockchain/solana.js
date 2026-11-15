@@ -1,5 +1,5 @@
 // Dependencies
-const {
+import {
     Connection,
     Keypair,
     PublicKey,
@@ -7,25 +7,25 @@ const {
     Transaction,
     LAMPORTS_PER_SOL,
     sendAndConfirmTransaction
-} = require('@solana/web3.js');
+} from '@solana/web3.js';
 
 // Environment
-const env = require('../config/env');
+import env from '../config/env.js';
 
 // Logger
-const logger = require('../lib/logger');
+import * as logger from '../lib/logger.js';
 
 // Security
-const encryption = require('../security/encryption');
+import * as encryption from '../security/encryption.js';
 
 // Connection
 const connection = new Connection(env.SOLANA_RPC_URL, env.SOLANA_COMMITMENT);
 
 // To Lamports
-exports.toLamports = (sol) => BigInt(Math.round(sol * LAMPORTS_PER_SOL));
+export const toLamports = (sol) => BigInt(Math.round(sol * LAMPORTS_PER_SOL));
 
 // To SOL
-exports.toSol = (lamports) => Number(lamports) / LAMPORTS_PER_SOL;
+export const toSol = (lamports) => Number(lamports) / LAMPORTS_PER_SOL;
 
 // To Keypair
 const toKeypair = (encryptedPrivateKey) => {
@@ -33,7 +33,7 @@ const toKeypair = (encryptedPrivateKey) => {
 };
 
 // Create
-exports.create = async () => {
+export const create = async () => {
 
     const keypair = await Keypair.generate();
 
@@ -44,12 +44,12 @@ exports.create = async () => {
 };
 
 // Get Balance
-exports.getBalance = (publicKey) => {
+export const getBalance = (publicKey) => {
     return connection.getBalance(new PublicKey(publicKey));
 };
 
 // Subscribe
-exports.subscribe = (publicKey, onBalanceChange) => {
+export const subscribe = (publicKey, onBalanceChange) => {
     return connection.onAccountChange(new PublicKey(publicKey), async (accountInfo) => {
         try {
             await onBalanceChange(accountInfo.lamports);
@@ -60,12 +60,12 @@ exports.subscribe = (publicKey, onBalanceChange) => {
 };
 
 // Unsubscribe
-exports.unsubscribe = (subscriptionID) => {
+export const unsubscribe = (subscriptionID) => {
     return connection.removeAccountChangeListener(subscriptionID);
 };
 
 // Transfer
-exports.transfer = async (encryptedPrivateKey, destination) => {
+export const transfer = async (encryptedPrivateKey, destination) => {
 
     const sender = await toKeypair(encryptedPrivateKey);
     const recipient = new PublicKey(destination);

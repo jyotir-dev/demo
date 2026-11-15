@@ -10,4 +10,4 @@ class ApiError extends Error {
 }
 
 // Export API Error
-module.exports = ApiError;
+export default ApiError;

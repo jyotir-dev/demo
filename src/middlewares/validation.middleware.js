@@ -1,6 +1,6 @@
 // Errors
-const ApiError = require('../errors/api.error');
-const { BadRequestError } = require('../errors/http.errors');
+import ApiError from '../errors/api.error.js';
+import { BadRequestError } from '../errors/http.errors.js';
 
 // Validate Request
 function validateRequest(validator) {
@@ -14,5 +14,5 @@ function validateRequest(validator) {
     };
 }
 
-// Export Middleware
-module.exports = validateRequest;
+// Export Validate Request
+export default validateRequest;

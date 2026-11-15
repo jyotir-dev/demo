@@ -10,4 +10,4 @@ function catchAsync(handler) {
 }
 
 // Export Catch Async
-module.exports = catchAsync;
+export default catchAsync;

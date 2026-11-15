@@ -1,18 +1,17 @@
 // Dependencies
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 // Environment
-const env = require('../config/env');
+import env from '../config/env.js';
 
-// Settings
+// Constants
 const IV_LENGTH = 12;
 const VERSION = 'v1';
 const ALGORITHM = 'aes-256-gcm';
-
 const KEY = Buffer.from(env.ENCRYPTION_KEY, 'hex');
 
 // Encrypt
-exports.encrypt = (plaintext) => {
+export const encrypt = (plaintext) => {
 
     const iv = crypto.randomBytes(IV_LENGTH);
     const cipher = crypto.createCipheriv(ALGORITHM, KEY, iv);
@@ -29,7 +28,7 @@ exports.encrypt = (plaintext) => {
 };
 
 // Decrypt
-exports.decrypt = (payload) => {
+export const decrypt = (payload) => {
 
     const [version, iv, authTag, ciphertext] = payload.split(':');
 

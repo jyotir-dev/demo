@@ -1,11 +1,11 @@
 // Environment
-const env = require('./env');
+import env from './env.js';
 
 // Dependencies
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Logger
-const logger = require('../lib/logger');
+import * as logger from '../lib/logger.js';
 
 // Connection Options
 const CONNECTION_OPTIONS = {
@@ -26,7 +26,7 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // Connect Database
-module.exports = async () => {
+const connectDatabase = async () => {
 
     const start = Date.now();
 
@@ -38,3 +38,6 @@ module.exports = async () => {
         throw error;
     }
 };
+
+// Export Connect Database
+export default connectDatabase;

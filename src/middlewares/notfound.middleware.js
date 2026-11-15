@@ -1,5 +1,5 @@
 // Errors
-const { NotFoundError } = require('../errors/http.errors');
+import { NotFoundError } from '../errors/http.errors.js';
 
 // Handle Not Found
 function handleNotFound() {
@@ -8,5 +8,5 @@ function handleNotFound() {
     };
 }
 
-// Export Middleware
-module.exports = handleNotFound;
+// Export Handle Not Found
+export default handleNotFound;

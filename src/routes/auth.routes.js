@@ -1,24 +1,24 @@
 // Dependencies
-const express = require('express');
+import express from 'express';
+
+// Limits
+import * as authLimits from '../limits/auth.limits.js';
+
+// Validators
+import * as authValidator from '../validators/auth.validator.js';
+
+// Controllers
+import * as authController from '../controllers/auth.controller.js';
+
+// Middlewares
+import requireAuth from '../middlewares/auth.middleware.js';
+import rateLimit from '../middlewares/ratelimit.middleware.js';
+import validateRequest from '../middlewares/validation.middleware.js';
 
 // Express Router
 const router = express.Router();
 
-// Limits
-const authLimits = require('../limits/auth.limits');
-
-// Validators
-const authValidator = require('../validators/auth.validator');
-
-// Controllers
-const authController = require('../controllers/auth.controller');
-
-// Middlewares
-const requireAuth = require('../middlewares/auth.middleware');
-const rateLimit = require('../middlewares/ratelimit.middleware');
-const validateRequest = require('../middlewares/validation.middleware');
-
-// Authentication Routes
+// Auth Routes
 router.post(
     '/signup',
     rateLimit(authLimits.signup),
@@ -87,5 +87,5 @@ router.post(
     authController.verifyResetToken
 );
 
-// Export Router
-module.exports = router;
+// Export Auth Routes
+export default router;

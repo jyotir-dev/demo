@@ -1,11 +1,11 @@
 // Dependencies
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 // Environment
-const env = require('../config/env');
+import env from '../config/env.js';
 
 // Logger
-const logger = require('../lib/logger')
+import * as logger from '../lib/logger.js';
 
 // Transporter
 const transporter = nodemailer.createTransport({
@@ -22,16 +22,17 @@ const transporter = nodemailer.createTransport({
 });
 
 // Send Email
-exports.sendEmail = ({ to, subject, html, text }) => {
+export const sendEmail = ({ to, subject, html, text }) => {
 
-    transporter.sendMail({
-        from: env.EMAIL_FROM,
-        to,
-        subject,
-        html,
-        text
-    })
-    .catch((error) => {
-        logger.error('EMAIL', `Failed to send "${subject}"`, error.message);
-    });
+    transporter
+        .sendMail({
+            from: env.EMAIL_FROM,
+            to,
+            subject,
+            html,
+            text
+        })
+        .catch((error) => {
+            logger.error('EMAIL', `Failed to send "${subject}"`, error.message);
+        });
 };

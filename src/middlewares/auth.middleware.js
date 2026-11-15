@@ -1,17 +1,17 @@
 // Security
-const JWT = require('../security/jwt');
+import * as JWT from '../security/jwt.js';
 
 // Models
-const User = require('../models/user.model');
+import User from '../models/user.model.js';
 
 // Errors
-const { UnauthorizedError } = require('../errors/http.errors');
+import { UnauthorizedError } from '../errors/http.errors.js';
 
 // Require Auth
 function requireAuth() {
     return async function requireAuth(req, res, next) {
         try {
-            
+
             const token = req.cookies?.token;
 
             if (!token) {
@@ -40,5 +40,5 @@ function requireAuth() {
     };
 }
 
-// Export Middleware
-module.exports = requireAuth;
+// Export Require Auth
+export default requireAuth;

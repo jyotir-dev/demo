@@ -1,12 +1,12 @@
 // Dependencies
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 // Hash Token
-exports.hash = (token) => {
+export const hash = (token) => {
     return crypto.createHash('sha256').update(token).digest('hex');
 };
 
 // Generate Token
-exports.generate = (bytes = 32) => {
+export const generate = (bytes = 32) => {
     return crypto.randomBytes(bytes).toString('hex');
 };

@@ -1,11 +1,11 @@
 // Dependencies
-const express = require('express');
+import express from 'express';
+
+// Controllers
+import * as healthController from '../controllers/health.controller.js';
 
 // Express Router
 const router = express.Router();
-
-// Controllers
-const healthController = require('../controllers/health.controller');
 
 // Health Routes
 router.get(
@@ -13,5 +13,5 @@ router.get(
     healthController.health
 );
 
-// Export Router
-module.exports = router;
+// Export Health Routes
+export default router;

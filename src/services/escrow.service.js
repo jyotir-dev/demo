@@ -1,27 +1,18 @@
 // Dependencies
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 // Models
-const User = require('../models/user.model');
-const Escrow = require('../models/escrow.model');
+import User from '../models/user.model.js';
+import Escrow from '../models/escrow.model.js';
 
 // Enums
-const {
-    ESCROW_STATUS,
-    ESCROW_ROLE,
-    ESCROW_ACTION
-} = require('../enums/escrow.enums');
+import { ESCROW_STATUS, ESCROW_ROLE, ESCROW_ACTION } from '../enums/escrow.enums.js';
 
 // Errors
-const {
-    BadRequestError,
-    ForbiddenError,
-    NotFoundError,
-    ConflictError
-} = require('../errors/http.errors');
+import { BadRequestError, ForbiddenError, NotFoundError, ConflictError } from '../errors/http.errors.js';
 
 // Blockchain
-const solana = require('../blockchain/solana');
+import * as solana from '../blockchain/solana.js';
 
 // Constants
 const PUBLIC_ID_BYTES = 8;
@@ -50,7 +41,7 @@ const watchDeposit = (escrow) => {
 };
 
 // Create
-exports.create = async (user, body) => {
+export const create = async (user, body) => {
 
     const role = body.role.trim();
     const username = body.username.trim();
@@ -102,7 +93,7 @@ exports.create = async (user, body) => {
 };
 
 // Escrows
-exports.escrows = async (user) => {
+export const escrows = async (user) => {
 
     const escrows = await Escrow.find({
         $or: [
@@ -132,7 +123,7 @@ exports.escrows = async (user) => {
 };
 
 // Escrow
-exports.escrow = async (user, params) => {
+export const escrow = async (user, params) => {
 
     const publicID = params.publicID;
 
@@ -168,7 +159,7 @@ exports.escrow = async (user, params) => {
 };
 
 // Respond
-exports.respond = async (user, params, body) => {
+export const respond = async (user, params, body) => {
 
     const publicID = params.publicID;
     const action = body.action;
@@ -249,7 +240,7 @@ exports.respond = async (user, params, body) => {
 };
 
 // Release
-exports.release = async (user, params) => {
+export const release = async (user, params) => {
 
     const publicID = params.publicID;
 
@@ -289,7 +280,7 @@ exports.release = async (user, params) => {
 };
 
 // Withdraw
-exports.withdraw = async (user, params, body) => {
+export const withdraw = async (user, params, body) => {
 
     const publicID = params.publicID;
     const address = body.address.trim();

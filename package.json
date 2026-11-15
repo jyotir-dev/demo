@@ -17,7 +17,7 @@
   ],
   "author": "jyotir-dev",
   "license": "UNLICENSED",
-  "type": "commonjs",
+  "type": "module",
   "engines": {
     "node": ">=22"
   },

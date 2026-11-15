@@ -1,14 +1,11 @@
 // Dependencies
-const { PublicKey } = require('@solana/web3.js');
+import { PublicKey } from '@solana/web3.js';
 
 // Enums
-const { 
-    ESCROW_ROLE,
-    ESCROW_ACTION 
-} = require('../enums/escrow.enums');
+import { ESCROW_ROLE, ESCROW_ACTION } from '../enums/escrow.enums.js';
 
 // Errors
-const { BadRequestError } = require('../errors/http.errors');
+import { BadRequestError } from '../errors/http.errors.js';
 
 // Regex
 const PUBLIC_ID_REGEX = /^[a-f0-9]{16}$/;
@@ -24,7 +21,7 @@ const AMOUNT_MIN = 0.001;
 const AMOUNT_MAX = 1000;
 
 // Create Validation
-exports.create = (params, body, query) => {
+export const create = (params, body, query) => {
 
     const role = body.role;
     const username = body.username;
@@ -32,12 +29,10 @@ exports.create = (params, body, query) => {
     const description = body.description;
     const amount = body.amount;
 
-    // Role
     if (!Object.values(ESCROW_ROLE).includes(role)) {
         throw new BadRequestError('Role must be either sender or receiver.');
     }
 
-    // Username
     if (typeof username !== 'string' || !username.trim()) {
         throw new BadRequestError('Username is required.');
     }
@@ -46,7 +41,6 @@ exports.create = (params, body, query) => {
         throw new BadRequestError('Invalid username.');
     }
 
-    // Title
     if (typeof title !== 'string' || !title.trim()) {
         throw new BadRequestError('Title is required.');
     }
@@ -55,7 +49,6 @@ exports.create = (params, body, query) => {
         throw new BadRequestError(`Title must be at most ${TITLE_MAX} characters.`);
     }
 
-    // Description
     if (description !== undefined && description !== null) {
 
         if (typeof description !== 'string') {
@@ -67,7 +60,6 @@ exports.create = (params, body, query) => {
         }
     }
 
-    // Amount
     if (typeof amount !== 'number' || !Number.isFinite(amount)) {
         throw new BadRequestError('Amount must be a number.');
     }
@@ -82,56 +74,50 @@ exports.create = (params, body, query) => {
 };
 
 // Public ID Validation
-exports.publicID = (params, body, query) => {
+export const publicID = (params, body, query) => {
 
     const publicID = params.publicID;
 
-    // Public ID
     if (typeof publicID !== 'string' || !PUBLIC_ID_REGEX.test(publicID)) {
         throw new BadRequestError('Invalid escrow public ID.');
     }
 };
 
 // Respond Validation
-exports.respond = (params, body, query) => {
+export const respond = (params, body, query) => {
 
     const action = body.action;
     const publicID = params.publicID;
 
-    // Public ID
     if (typeof publicID !== 'string' || !PUBLIC_ID_REGEX.test(publicID)) {
         throw new BadRequestError('Invalid escrow public ID.');
     }
 
-    // Action
     if (!Object.values(ESCROW_ACTION).includes(action)) {
         throw new BadRequestError('Action must be either accept or deny.');
     }
 };
 
 // Release Validation
-exports.release = (params, body, query) => {
+export const release = (params, body, query) => {
 
     const publicID = params.publicID;
 
-    // Public ID
     if (typeof publicID !== 'string' || !PUBLIC_ID_REGEX.test(publicID)) {
         throw new BadRequestError('Invalid escrow public ID.');
     }
 };
 
 // Withdraw Validation
-exports.withdraw = (params, body, query) => {
+export const withdraw = (params, body, query) => {
 
     const address = body.address;
     const publicID = params.publicID;
 
-    // Public ID
     if (typeof publicID !== 'string' || !PUBLIC_ID_REGEX.test(publicID)) {
         throw new BadRequestError('Invalid escrow public ID.');
     }
 
-    // Address
     if (typeof address !== 'string' || !address.trim()) {
         throw new BadRequestError('Withdrawal address is required.');
     }

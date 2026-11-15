@@ -1,22 +1,18 @@
 // Dependencies
-const bcrypt = require('bcrypt');
+import bcrypt from 'bcrypt';
 
 // Models
-const User = require('../models/user.model');
+import User from '../models/user.model.js';
 
 // Security
-const JWT = require('../security/jwt');
-const Token = require('../security/token');
+import * as JWT from '../security/jwt.js';
+import * as Token from '../security/token.js';
 
 // Mailers
-const authMailer = require('../mailers/auth.mailer');
+import * as authMailer from '../mailers/auth.mailer.js';
 
 // Errors
-const {
-    BadRequestError,
-    UnauthorizedError,
-    ConflictError
-} = require('../errors/http.errors');
+import { BadRequestError, UnauthorizedError, ConflictError } from '../errors/http.errors.js';
 
 // Constants
 const TOKEN_BYTES = 32;
@@ -28,7 +24,7 @@ const VERIFICATION_TOKEN_TTL = 24 * 60 * 60 * 1000;
 const DUMMY_HASH = bcrypt.hashSync('kairo-dummy-password', BCRYPT_ROUNDS);
 
 // Signup
-exports.signup = async (body) => {
+export const signup = async (body) => {
 
     const username = body.username.trim();
     const email = body.email.trim().toLowerCase();
@@ -78,7 +74,7 @@ exports.signup = async (body) => {
 };
 
 // Login
-exports.login = async (body) => {
+export const login = async (body) => {
 
     const username = body.username.trim();
     const password = body.password;
@@ -113,7 +109,7 @@ exports.login = async (body) => {
 };
 
 // Me
-exports.me = async (user) => {
+export const me = async (user) => {
     return {
         response: {
             success: true,
@@ -129,7 +125,7 @@ exports.me = async (user) => {
 };
 
 // Logout
-exports.logout = async () => {
+export const logout = async () => {
     return {
         response: {
             success: true,
@@ -139,7 +135,7 @@ exports.logout = async () => {
 };
 
 // Change Password
-exports.changePassword = async (user, body) => {
+export const changePassword = async (user, body) => {
 
     const currentPassword = body.currentPassword;
     const newPassword = body.newPassword;
@@ -195,7 +191,7 @@ exports.changePassword = async (user, body) => {
 };
 
 // Verify Email
-exports.verifyEmail = async (body) => {
+export const verifyEmail = async (body) => {
 
     const token = body.token;
     const tokenHash = Token.hash(token);
@@ -228,7 +224,7 @@ exports.verifyEmail = async (body) => {
 };
 
 // Resend Verification Email
-exports.resendVerification = async (user) => {
+export const resendVerification = async (user) => {
 
     if (user.emailVerified) {
         throw new ConflictError('Email is already verified.', 'EMAIL_ALREADY_VERIFIED');
@@ -258,7 +254,7 @@ exports.resendVerification = async (user) => {
 };
 
 // Forgot Password
-exports.forgotPassword = async (body) => {
+export const forgotPassword = async (body) => {
 
     const email = body.email.trim().toLowerCase();
 
@@ -296,7 +292,7 @@ exports.forgotPassword = async (body) => {
 };
 
 // Reset Password
-exports.resetPassword = async (body) => {
+export const resetPassword = async (body) => {
 
     const token = body.token;
     const password = body.password;
@@ -335,7 +331,7 @@ exports.resetPassword = async (body) => {
 };
 
 // Verify Reset Token
-exports.verifyResetToken = async (body) => {
+export const verifyResetToken = async (body) => {
 
     const token = body.token;
 

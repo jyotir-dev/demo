@@ -1,14 +1,14 @@
 // Dependencies
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 // Environment
-const env = require('../config/env');
+import env from '../config/env.js';
 
 // Constants
 const TOKEN_TTL = 7 * 24 * 60 * 60;
 
 // Sign Token
-exports.signToken = (user) => {
+export const signToken = (user) => {
     return jwt.sign(
         {
             id: user._id,
@@ -19,7 +19,7 @@ exports.signToken = (user) => {
     );
 };
 
-//  Verify Token
-exports.verifyToken = (token) => {
+// Verify Token
+export const verifyToken = (token) => {
     return jwt.verify(token, env.JWT_SECRET);
-}
+};

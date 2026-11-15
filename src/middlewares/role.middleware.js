@@ -1,5 +1,5 @@
 // Errors
-const { ForbiddenError } = require('../errors/http.errors');
+import { ForbiddenError } from '../errors/http.errors.js';
 
 // Require Role
 function requireRole(...roles) {
@@ -13,5 +13,5 @@ function requireRole(...roles) {
     };
 }
 
-// Export Middleware
-module.exports = requireRole;
+// Export Require Role
+export default requireRole;

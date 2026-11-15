@@ -1,5 +1,5 @@
-// Colors
-const COLORS = {
+// ANSI Codes
+const ANSI = Object.freeze({
     reset: '\x1b[0m',
     gray: '\x1b[90m',
     cyan: '\x1b[36m',
@@ -7,38 +7,42 @@ const COLORS = {
     yellow: '\x1b[33m',
     red: '\x1b[31m',
     magenta: '\x1b[35m'
-};
+});
 
-// Get Status Color
-function getStatusColor(status) {
-    if (status >= 500) return COLORS.red;
-    if (status >= 400) return COLORS.yellow;
-    if (status >= 300) return COLORS.cyan;
-    if (status >= 200) return COLORS.green;
-    return COLORS.magenta;
-}
+// Colorize
+const colorize = (color, text) => `${color}${text}${ANSI.reset}`;
+
+// Status Color
+const getStatusColor = (status) => {
+    if (status >= 500) return ANSI.red;
+    if (status >= 400) return ANSI.yellow;
+    if (status >= 300) return ANSI.cyan;
+    if (status >= 200) return ANSI.green;
+    return ANSI.magenta;
+};
 
 // Log Request
 function logRequest() {
     return function logRequest(req, res, next) {
+
         const start = process.hrtime.bigint();
 
         res.on('finish', () => {
-            const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
-            const statusColor = getStatusColor(res.statusCode);
 
-            console.log(
-                `${COLORS.gray}${new Date().toLocaleTimeString()}${COLORS.reset} ` +
-                `${COLORS.cyan}${req.method.padEnd(5)}${COLORS.reset} ` +
-                `${req.originalUrl.padEnd(20)} ` +
-                `${statusColor}${res.statusCode}${COLORS.reset} ` +
-                `${COLORS.gray}${duration.toFixed(2)}ms${COLORS.reset}`
-            );
+            const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
+
+            const timestamp = colorize(ANSI.gray, new Date().toLocaleTimeString());
+            const methodText = colorize(ANSI.cyan, req.method.padEnd(6));
+            const urlText = req.originalUrl.padEnd(20);
+            const statusText = colorize(getStatusColor(res.statusCode), res.statusCode);
+            const durationText = colorize(ANSI.gray, `${duration.toFixed(2)}ms`);
+
+            console.log(`${timestamp} ${methodText} ${urlText} ${statusText} ${durationText}`);
         });
 
         next();
     };
 }
 
-// Export Middleware
-module.exports = logRequest;
+// Export Log Request
+export default logRequest;

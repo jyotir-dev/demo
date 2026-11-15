@@ -1,5 +1,5 @@
 // Layout
-const renderEmail = require('./layout.email');
+import renderEmail from './layout.email.js';
 
 // Changed At
 const formatChangedAt = () => new Date().toLocaleString('en-GB', {
@@ -12,7 +12,7 @@ const formatChangedAt = () => new Date().toLocaleString('en-GB', {
 }) + ' UTC';
 
 // Security Email
-module.exports = ({ user, secureAccountURL }) => ({
+const securityEmail = ({ user, secureAccountURL }) => ({
     subject: 'Your Kairo password was changed',
     ...renderEmail({
         preheader: 'Your Kairo password was just changed and every device was signed out.',
@@ -33,3 +33,6 @@ module.exports = ({ user, secureAccountURL }) => ({
         recipient: user.email
     })
 });
+
+// Export Security Email
+export default securityEmail;

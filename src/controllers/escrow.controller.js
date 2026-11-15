@@ -1,41 +1,41 @@
 // Catch Async
-const catchAsync = require('../utils/catch-async');
+import catchAsync from '../utils/catch-async.js';
 
 // Services
-const escrowService = require('../services/escrow.service')
+import * as escrowService from '../services/escrow.service.js';
 
 // Create
-exports.create = catchAsync(async (req, res) => {
+export const create = catchAsync(async (req, res) => {
     const result = await escrowService.create(req.user, req.body);
     res.status(201).json(result.response);
 });
 
 // Escrows
-exports.escrows = catchAsync(async (req, res) => {
+export const escrows = catchAsync(async (req, res) => {
     const result = await escrowService.escrows(req.user);
     res.status(200).json(result.response);
 });
 
 // Escrow
-exports.escrow = catchAsync(async (req, res) => {
+export const escrow = catchAsync(async (req, res) => {
     const result = await escrowService.escrow(req.user, req.params);
     res.status(200).json(result.response);
 });
 
 // Respond
-exports.respond = catchAsync(async (req, res) => {
+export const respond = catchAsync(async (req, res) => {
     const result = await escrowService.respond(req.user, req.params, req.body);
     res.status(200).json(result.response);
 });
 
 // Release
-exports.release = catchAsync(async (req, res) => {
+export const release = catchAsync(async (req, res) => {
     const result = await escrowService.release(req.user, req.params);
     res.status(200).json(result.response);
 });
 
 // Withdraw
-exports.withdraw = catchAsync(async (req, res) => {
+export const withdraw = catchAsync(async (req, res) => {
     const result = await escrowService.withdraw(req.user, req.params, req.body);
     res.status(200).json(result.response);
 });

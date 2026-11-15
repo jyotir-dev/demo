@@ -1,8 +1,8 @@
 // Layout
-const renderEmail = require('./layout.email');
+import renderEmail from './layout.email.js';
 
 // Reset Email
-module.exports = ({ user, resetURL }) => ({
+const resetEmail = ({ user, resetURL }) => ({
     subject: 'Reset your Kairo password',
     ...renderEmail({
         preheader: 'Use this link to choose a new password for your Kairo account.',
@@ -23,3 +23,6 @@ module.exports = ({ user, resetURL }) => ({
         recipient: user.email
     })
 });
+
+// Export Reset Email
+export default resetEmail;

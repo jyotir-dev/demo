@@ -31,7 +31,7 @@ const log = (level, scope, message, detail) => {
 };
 
 // Export Logger
-exports.info = (scope, message, detail) => log('info', scope, message, detail);
-exports.success = (scope, message, detail) => log('success', scope, message, detail);
-exports.warn = (scope, message, detail) => log('warn', scope, message, detail);
-exports.error = (scope, message, detail) => log('error', scope, message, detail);
+export const info = (scope, message, detail) => log('info', scope, message, detail);
+export const success = (scope, message, detail) => log('success', scope, message, detail);
+export const warn = (scope, message, detail) => log('warn', scope, message, detail);
+export const error = (scope, message, detail) => log('error', scope, message, detail);

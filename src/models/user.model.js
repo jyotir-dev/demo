@@ -1,8 +1,8 @@
 // Dependencies
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 // Enums
-const { USER_ROLE } = require('../enums/user.enums');
+import { USER_ROLE } from '../enums/user.enums.js';
 
 // User Schema
 const userSchema = new mongoose.Schema({
@@ -50,10 +50,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         select: false
     }
-},  { timestamps: true });
+}, { timestamps: true });
 
 // User Model
 const User = mongoose.model('User', userSchema);
 
 // Export User Model
-module.exports = User;
+export default User;

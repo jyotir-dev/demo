@@ -1,21 +1,21 @@
 // Dependencies
-const cors = require('cors');
-const helmet = require('helmet');
-const express = require('express');
-const cookieParser = require('cookie-parser');
+import cors from 'cors';
+import helmet from 'helmet';
+import express from 'express';
+import cookieParser from 'cookie-parser';
 
 // Environment
-const env = require('./config/env');
+import env from './config/env.js';
 
 // Routes
-const authRoutes = require('./routes/auth.routes');
-const escrowRoutes = require('./routes/escrow.routes');
-const healthRoutes = require('./routes/health.routes');
+import authRoutes from './routes/auth.routes.js';
+import escrowRoutes from './routes/escrow.routes.js';
+import healthRoutes from './routes/health.routes.js';
 
 // Middlewares
-const logRequest = require('./middlewares/logger.middleware');
-const handleError = require('./middlewares/error.middleware');
-const handleNotFound = require('./middlewares/notfound.middleware');
+import logRequest from './middlewares/logger.middleware.js';
+import handleError from './middlewares/error.middleware.js';
+import handleNotFound from './middlewares/notfound.middleware.js';
 
 // Express App
 const app = express();
@@ -57,4 +57,4 @@ app.use(handleNotFound());
 app.use(handleError());
 
 // Export Express App
-module.exports = app;
+export default app;
