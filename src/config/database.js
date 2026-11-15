@@ -27,7 +27,6 @@ mongoose.connection.on('reconnected', () => {
 
 // Connect Database
 export const connect = async () => {
-
     const start = Date.now();
 
     await mongoose.connect(env.MONGO_URI, CONNECTION_OPTIONS);

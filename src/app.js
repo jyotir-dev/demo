@@ -35,10 +35,12 @@ app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
 
 // CORS Policy
-app.use(cors({
-    origin: env.CLIENT_URL,
-    credentials: true
-}));
+app.use(
+    cors({
+        origin: env.CLIENT_URL,
+        credentials: true
+    })
+);
 
 // Request Logger
 app.use(logRequest());

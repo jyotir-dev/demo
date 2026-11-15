@@ -21,7 +21,6 @@ const colorize = (color, text) => `${color}${text}${ANSI.reset}`;
 
 // Log
 const log = (level, scope, message, detail) => {
-
     const timestamp = colorize(ANSI.gray, new Date().toLocaleTimeString());
     const scopeText = colorize(ANSI.magenta, scope.padEnd(8));
     const messageText = colorize(LEVEL_COLORS[level], message);

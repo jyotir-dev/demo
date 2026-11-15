@@ -35,54 +35,81 @@ const ORB = {
 };
 
 // Escape
-const escape = (value) => String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+const escape = (value) =>
+    String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 
 // Format
-const format = (value) => escape(value).replace(/\*\*(.+?)\*\*/g, `<strong style="font-weight: 600; color: ${COLOR.strong};">$1</strong>`);
+const format = (value) =>
+    escape(value).replace(/\*\*(.+?)\*\*/g, `<strong style="font-weight: 600; color: ${COLOR.strong};">$1</strong>`);
 
 // Plain
 const plain = (value) => String(value).replace(/\*\*(.+?)\*\*/g, '$1');
 
 // Render HTML
-const renderHTML = ({ preheader, heading, paragraphs, points = [], details = [], action, note, footnote, recipient }) => {
-
+const renderHTML = ({
+    preheader,
+    heading,
+    paragraphs,
+    points = [],
+    details = [],
+    action,
+    note,
+    footnote,
+    recipient
+}) => {
     const url = escape(action.url);
 
-    const paragraphRows = paragraphs.map((paragraph) => `
+    const paragraphRows = paragraphs
+        .map(
+            (paragraph) => `
                                             <tr>
                                                 <td style="padding-bottom: 18px; font-family: ${FONT.text}; font-size: 14px; line-height: 21px; letter-spacing: -0.1px; color: ${COLOR.text};">
                                                     ${format(paragraph)}
                                                 </td>
-                                            </tr>`).join('');
+                                            </tr>`
+        )
+        .join('');
 
-    const pointRows = points.length ? `
+    const pointRows = points.length
+        ? `
                                             <tr>
                                                 <td style="padding-bottom: 20px;">
-                                                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${COLOR.group}" style="background-color: ${COLOR.group}; border-radius: 10px; border-collapse: separate; border-spacing: 0;">${points.map((point, index) => `
+                                                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${COLOR.group}" style="background-color: ${COLOR.group}; border-radius: 10px; border-collapse: separate; border-spacing: 0;">${points
+                                                        .map(
+                                                            (point, index) => `
                                                         <tr>
                                                             <td valign="middle" style="width: 20px; padding: 10px 0 10px 14px; ${index ? `border-top: 1px solid ${COLOR.groupRule};` : ''} font-family: ${FONT.text}; font-size: 13px; line-height: 18px; color: ${COLOR.accent};">&#10003;</td>
                                                             <td style="padding: 10px 14px 10px 8px; ${index ? `border-top: 1px solid ${COLOR.groupRule};` : ''} font-family: ${FONT.text}; font-size: 13px; line-height: 18px; letter-spacing: -0.1px; color: ${COLOR.text};">${format(point)}</td>
-                                                        </tr>`).join('')}
+                                                        </tr>`
+                                                        )
+                                                        .join('')}
                                                     </table>
                                                 </td>
-                                            </tr>` : '';
+                                            </tr>`
+        : '';
 
-    const detailRows = details.length ? `
+    const detailRows = details.length
+        ? `
                                             <tr>
                                                 <td style="padding-bottom: 20px;">
-                                                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${COLOR.group}" style="background-color: ${COLOR.group}; border-radius: 10px; border-collapse: separate; border-spacing: 0;">${details.map(([label, value], index) => `
+                                                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${COLOR.group}" style="background-color: ${COLOR.group}; border-radius: 10px; border-collapse: separate; border-spacing: 0;">${details
+                                                        .map(
+                                                            ([label, value], index) => `
                                                         <tr>
                                                             <td align="left" style="padding: 10px 14px; ${index ? `border-top: 1px solid ${COLOR.groupRule};` : ''} font-family: ${FONT.text}; font-size: 13px; line-height: 18px; letter-spacing: -0.1px; color: ${COLOR.text};">${escape(label)}</td>
                                                             <td align="right" style="padding: 10px 14px; ${index ? `border-top: 1px solid ${COLOR.groupRule};` : ''} font-family: ${FONT.text}; font-size: 13px; line-height: 18px; letter-spacing: -0.1px; font-weight: 500; color: ${COLOR.strong}; text-align: right;">${escape(value)}</td>
-                                                        </tr>`).join('')}
+                                                        </tr>`
+                                                        )
+                                                        .join('')}
                                                     </table>
                                                 </td>
-                                            </tr>` : '';
+                                            </tr>`
+        : '';
 
     return `<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -214,16 +241,19 @@ const renderHTML = ({ preheader, heading, paragraphs, points = [], details = [],
 };
 
 // Render Text
-const renderText = ({ heading, paragraphs, points = [], details = [], action, note, footnote, recipient }) => [
-    heading,
-    ...paragraphs.map(plain),
-    points.map((point) => `- ${plain(point)}`).join('\n'),
-    details.map(([label, value]) => `${label}: ${value}`).join('\n'),
-    `${action.label}: ${action.url}`,
-    plain(note),
-    plain(footnote),
-    `Copyright © ${new Date().getFullYear()} Kairo. Secure peer-to-peer escrow on Solana.\nSent to ${recipient}. Kairo will never ask for your password by email.`
-].filter(Boolean).join('\n\n');
+const renderText = ({ heading, paragraphs, points = [], details = [], action, note, footnote, recipient }) =>
+    [
+        heading,
+        ...paragraphs.map(plain),
+        points.map((point) => `- ${plain(point)}`).join('\n'),
+        details.map(([label, value]) => `${label}: ${value}`).join('\n'),
+        `${action.label}: ${action.url}`,
+        plain(note),
+        plain(footnote),
+        `Copyright © ${new Date().getFullYear()} Kairo. Secure peer-to-peer escrow on Solana.\nSent to ${recipient}. Kairo will never ask for your password by email.`
+    ]
+        .filter(Boolean)
+        .join('\n\n');
 
 // Render Email
 const renderEmail = (content) => ({

@@ -6,7 +6,9 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/server.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [
     "kairo",
@@ -37,5 +39,8 @@
   },
   "allowScripts": {
     "bcrypt@6.0.0": true
+  },
+  "devDependencies": {
+    "prettier": "^3.10.1"
   }
 }

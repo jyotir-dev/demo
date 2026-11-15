@@ -24,11 +24,9 @@ const getStatusColor = (status) => {
 // Log Request
 function logRequest() {
     return function logRequest(req, res, next) {
-
         const start = process.hrtime.bigint();
 
         res.on('finish', () => {
-
             const duration = Number(process.hrtime.bigint() - start) / 1_000_000;
 
             const timestamp = colorize(ANSI.gray, new Date().toLocaleTimeString());

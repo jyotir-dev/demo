@@ -11,7 +11,6 @@ import verificationEmail from '../emails/verification.email.js';
 
 // Send Verification Email
 export const sendVerificationEmail = (user, rawToken) => {
-
     const verificationURL = `${env.CLIENT_URL}/verify-email?token=${rawToken}`;
 
     emailService.sendEmail({
@@ -22,7 +21,6 @@ export const sendVerificationEmail = (user, rawToken) => {
 
 // Send Reset Email
 export const sendResetEmail = (user, rawToken) => {
-
     const resetURL = `${env.CLIENT_URL}/reset-password?token=${rawToken}`;
 
     emailService.sendEmail({
@@ -33,7 +31,6 @@ export const sendResetEmail = (user, rawToken) => {
 
 // Send Security Email
 export const sendSecurityEmail = (user) => {
-
     const secureAccountURL = `${env.CLIENT_URL}/forgot-password`;
 
     emailService.sendEmail({

@@ -10,10 +10,7 @@ const verificationEmail = ({ user, verificationURL }) => ({
         paragraphs: [
             `Hi ${user.username}, welcome to Kairo. Confirm your email to finish setting up your account. Once it's verified, you can:`
         ],
-        points: [
-            '**Create escrows** with anyone on Kairo',
-            '**Accept escrow requests** sent to you'
-        ],
+        points: ['**Create escrows** with anyone on Kairo', '**Accept escrow requests** sent to you'],
         action: {
             label: 'Verify email address',
             url: verificationURL

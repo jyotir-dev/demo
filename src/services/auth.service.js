@@ -25,16 +25,12 @@ const DUMMY_HASH = bcrypt.hashSync('kairo-dummy-password', BCRYPT_ROUNDS);
 
 // Signup
 export const signup = async (body) => {
-
     const username = body.username.trim();
     const email = body.email.trim().toLowerCase();
     const password = body.password;
 
     const existingUser = await User.findOne({
-        $or: [
-            { username },
-            { email }
-        ]
+        $or: [{ username }, { email }]
     });
 
     if (existingUser) {
@@ -75,7 +71,6 @@ export const signup = async (body) => {
 
 // Login
 export const login = async (body) => {
-
     const username = body.username.trim();
     const password = body.password;
 
@@ -136,7 +131,6 @@ export const logout = async () => {
 
 // Change Password
 export const changePassword = async (user, body) => {
-
     const currentPassword = body.currentPassword;
     const newPassword = body.newPassword;
 
@@ -192,7 +186,6 @@ export const changePassword = async (user, body) => {
 
 // Verify Email
 export const verifyEmail = async (body) => {
-
     const token = body.token;
     const tokenHash = Token.hash(token);
 
@@ -225,7 +218,6 @@ export const verifyEmail = async (body) => {
 
 // Resend Verification Email
 export const resendVerification = async (user) => {
-
     if (user.emailVerified) {
         throw new ConflictError('Email is already verified.', 'EMAIL_ALREADY_VERIFIED');
     }
@@ -255,7 +247,6 @@ export const resendVerification = async (user) => {
 
 // Forgot Password
 export const forgotPassword = async (body) => {
-
     const email = body.email.trim().toLowerCase();
 
     const rawToken = Token.generate(TOKEN_BYTES);
@@ -293,7 +284,6 @@ export const forgotPassword = async (body) => {
 
 // Reset Password
 export const resetPassword = async (body) => {
-
     const token = body.token;
     const password = body.password;
 
@@ -332,7 +322,6 @@ export const resetPassword = async (body) => {
 
 // Verify Reset Token
 export const verifyResetToken = async (body) => {
-
     const token = body.token;
 
     const tokenHash = Token.hash(token);

@@ -22,7 +22,6 @@ const AMOUNT_MAX = 1000;
 
 // Create Validation
 export const create = (params, body, query) => {
-
     const role = body.role;
     const username = body.username;
     const title = body.title;
@@ -37,7 +36,11 @@ export const create = (params, body, query) => {
         throw new BadRequestError('Username is required.');
     }
 
-    if (username.trim().length < USERNAME_MIN || username.trim().length > USERNAME_MAX || !USERNAME_REGEX.test(username.trim())) {
+    if (
+        username.trim().length < USERNAME_MIN ||
+        username.trim().length > USERNAME_MAX ||
+        !USERNAME_REGEX.test(username.trim())
+    ) {
         throw new BadRequestError('Invalid username.');
     }
 
@@ -50,7 +53,6 @@ export const create = (params, body, query) => {
     }
 
     if (description !== undefined && description !== null) {
-
         if (typeof description !== 'string') {
             throw new BadRequestError('Description must be text.');
         }
@@ -75,7 +77,6 @@ export const create = (params, body, query) => {
 
 // Public ID Validation
 export const publicID = (params, body, query) => {
-
     const publicID = params.publicID;
 
     if (typeof publicID !== 'string' || !PUBLIC_ID_REGEX.test(publicID)) {
@@ -85,7 +86,6 @@ export const publicID = (params, body, query) => {
 
 // Respond Validation
 export const respond = (params, body, query) => {
-
     const action = body.action;
     const publicID = params.publicID;
 
@@ -100,7 +100,6 @@ export const respond = (params, body, query) => {
 
 // Release Validation
 export const release = (params, body, query) => {
-
     const publicID = params.publicID;
 
     if (typeof publicID !== 'string' || !PUBLIC_ID_REGEX.test(publicID)) {
@@ -110,7 +109,6 @@ export const release = (params, body, query) => {
 
 // Withdraw Validation
 export const withdraw = (params, body, query) => {
-
     const address = body.address;
     const publicID = params.publicID;
 

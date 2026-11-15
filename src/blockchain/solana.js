@@ -34,7 +34,6 @@ const toKeypair = (encryptedPrivateKey) => {
 
 // Create
 export const create = async () => {
-
     const keypair = await Keypair.generate();
 
     return {
@@ -66,7 +65,6 @@ export const unsubscribe = (subscriptionID) => {
 
 // Transfer
 export const transfer = async (encryptedPrivateKey, destination) => {
-
     const sender = await toKeypair(encryptedPrivateKey);
     const recipient = new PublicKey(destination);
 

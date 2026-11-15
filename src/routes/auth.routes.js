@@ -19,30 +19,13 @@ import validateRequest from '../middlewares/validation.middleware.js';
 const router = express.Router();
 
 // Auth Routes
-router.post(
-    '/signup',
-    rateLimit(authLimits.signup),
-    validateRequest(authValidator.signup),
-    authController.signup
-);
+router.post('/signup', rateLimit(authLimits.signup), validateRequest(authValidator.signup), authController.signup);
 
-router.post(
-    '/login',
-    rateLimit(authLimits.login),
-    validateRequest(authValidator.login),
-    authController.login
-);
+router.post('/login', rateLimit(authLimits.login), validateRequest(authValidator.login), authController.login);
 
-router.get(
-    '/me',
-    requireAuth(),
-    authController.me
-);
+router.get('/me', requireAuth(), authController.me);
 
-router.post(
-    '/logout',
-    authController.logout
-);
+router.post('/logout', authController.logout);
 
 router.patch(
     '/password',
@@ -59,12 +42,7 @@ router.post(
     authController.verifyEmail
 );
 
-router.post(
-    '/verify-email/resend',
-    rateLimit(authLimits.email),
-    requireAuth(),
-    authController.resendVerification
-);
+router.post('/verify-email/resend', rateLimit(authLimits.email), requireAuth(), authController.resendVerification);
 
 router.post(
     '/forgot-password',

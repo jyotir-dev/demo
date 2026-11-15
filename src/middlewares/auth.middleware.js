@@ -11,7 +11,6 @@ import { UnauthorizedError } from '../errors/http.errors.js';
 function requireAuth() {
     return async function requireAuth(req, res, next) {
         try {
-
             const token = req.cookies?.token;
 
             if (!token) {

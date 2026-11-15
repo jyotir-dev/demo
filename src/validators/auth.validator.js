@@ -15,7 +15,6 @@ const PASSWORD_MAX = 72;
 
 // Signup Validation
 export const signup = (params, body, query) => {
-
     const username = body.username;
     const email = body.email;
     const password = body.password;
@@ -51,7 +50,6 @@ export const signup = (params, body, query) => {
 
 // Login Validation
 export const login = (params, body, query) => {
-
     const username = body.username;
     const password = body.password;
 
@@ -59,7 +57,11 @@ export const login = (params, body, query) => {
         throw new BadRequestError('Username is required.');
     }
 
-    if (username.trim().length < USERNAME_MIN || username.trim().length > USERNAME_MAX || !USERNAME_REGEX.test(username.trim())) {
+    if (
+        username.trim().length < USERNAME_MIN ||
+        username.trim().length > USERNAME_MAX ||
+        !USERNAME_REGEX.test(username.trim())
+    ) {
         throw new BadRequestError('Invalid username or password.', 'INVALID_CREDENTIALS');
     }
 
@@ -74,7 +76,6 @@ export const login = (params, body, query) => {
 
 // Change Password Validation
 export const changePassword = (params, body, query) => {
-
     const currentPassword = body.currentPassword;
     const newPassword = body.newPassword;
 
@@ -97,7 +98,6 @@ export const changePassword = (params, body, query) => {
 
 // Verify Email Validation
 export const verifyEmail = (params, body, query) => {
-
     const token = body.token;
 
     if (typeof token !== 'string' || !TOKEN_REGEX.test(token)) {
@@ -107,7 +107,6 @@ export const verifyEmail = (params, body, query) => {
 
 // Forgot Password Validation
 export const forgotPassword = (params, body, query) => {
-
     const email = body.email;
 
     if (typeof email !== 'string' || !email.trim()) {
@@ -121,7 +120,6 @@ export const forgotPassword = (params, body, query) => {
 
 // Reset Password Validation
 export const resetPassword = (params, body, query) => {
-
     const token = body.token;
     const password = body.password;
 
@@ -140,7 +138,6 @@ export const resetPassword = (params, body, query) => {
 
 // Verify Reset Token Validation
 export const verifyResetToken = (params, body, query) => {
-
     const token = body.token;
 
     if (typeof token !== 'string' || !TOKEN_REGEX.test(token)) {

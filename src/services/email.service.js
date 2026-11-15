@@ -23,7 +23,6 @@ const transporter = nodemailer.createTransport({
 
 // Send Email
 export const sendEmail = ({ to, subject, html, text }) => {
-
     transporter
         .sendMail({
             from: env.EMAIL_FROM,

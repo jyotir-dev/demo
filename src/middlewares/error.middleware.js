@@ -18,7 +18,6 @@ const BODY_ERRORS = {
 // Handle Error
 function handleError() {
     return function handleError(error, req, res, next) {
-
         if (res.headersSent) {
             return next(error);
         }

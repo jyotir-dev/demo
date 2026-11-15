@@ -44,7 +44,6 @@ server.on('error', (error) => {
 
 // Shutdown
 const shutdown = (signal) => {
-
     logger.warn('SERVER', `${signal} received, shutting down.`);
 
     setTimeout(() => {

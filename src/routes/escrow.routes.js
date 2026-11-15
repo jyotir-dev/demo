@@ -29,18 +29,9 @@ router.post(
     escrowController.create
 );
 
-router.get(
-    '/escrows',
-    requireAuth(),
-    escrowController.escrows
-);
+router.get('/escrows', requireAuth(), escrowController.escrows);
 
-router.get(
-    '/:publicID',
-    requireAuth(),
-    validateRequest(escrowValidator.publicID),
-    escrowController.escrow
-);
+router.get('/:publicID', requireAuth(), validateRequest(escrowValidator.publicID), escrowController.escrow);
 
 router.patch(
     '/:publicID/respond',

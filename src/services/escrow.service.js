@@ -19,11 +19,9 @@ const PUBLIC_ID_BYTES = 8;
 
 // Watch Deposit
 const watchDeposit = (escrow) => {
-
     const requiredLamports = solana.toLamports(escrow.amount);
 
     const subscriptionID = solana.subscribe(escrow.wallet.publicKey, async (balance) => {
-
         if (balance < requiredLamports) {
             return;
         }
@@ -42,7 +40,6 @@ const watchDeposit = (escrow) => {
 
 // Create
 export const create = async (user, body) => {
-
     const role = body.role.trim();
     const username = body.username.trim();
     const title = body.title.trim();
@@ -94,12 +91,8 @@ export const create = async (user, body) => {
 
 // Escrows
 export const escrows = async (user) => {
-
     const escrows = await Escrow.find({
-        $or: [
-            { sender: user._id },
-            { receiver: user._id }
-        ]
+        $or: [{ sender: user._id }, { receiver: user._id }]
     })
         .populate('sender', 'username')
         .populate('receiver', 'username')
@@ -124,7 +117,6 @@ export const escrows = async (user) => {
 
 // Escrow
 export const escrow = async (user, params) => {
-
     const publicID = params.publicID;
 
     const escrow = await Escrow.findOne({ publicID })
@@ -160,7 +152,6 @@ export const escrow = async (user, params) => {
 
 // Respond
 export const respond = async (user, params, body) => {
-
     const publicID = params.publicID;
     const action = body.action;
 
@@ -179,7 +170,6 @@ export const respond = async (user, params, body) => {
     }
 
     if (action === ESCROW_ACTION.DENY) {
-
         const denied = await Escrow.findOneAndUpdate(
             {
                 _id: escrow._id,
@@ -241,7 +231,6 @@ export const respond = async (user, params, body) => {
 
 // Release
 export const release = async (user, params) => {
-
     const publicID = params.publicID;
 
     const escrow = await Escrow.findOne({ publicID });
@@ -281,7 +270,6 @@ export const release = async (user, params) => {
 
 // Withdraw
 export const withdraw = async (user, params, body) => {
-
     const publicID = params.publicID;
     const address = body.address.trim();
 

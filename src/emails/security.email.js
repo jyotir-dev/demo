@@ -2,14 +2,15 @@
 import renderEmail from './layout.email.js';
 
 // Changed At
-const formatChangedAt = () => new Date().toLocaleString('en-GB', {
-    timeZone: 'UTC',
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-}) + ' UTC';
+const formatChangedAt = () =>
+    new Date().toLocaleString('en-GB', {
+        timeZone: 'UTC',
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    }) + ' UTC';
 
 // Security Email
 const securityEmail = ({ user, secureAccountURL }) => ({

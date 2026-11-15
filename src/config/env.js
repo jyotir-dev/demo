@@ -1,6 +1,6 @@
 // Dependencies
 import { z } from 'zod';
-import dotenv  from 'dotenv';
+import dotenv from 'dotenv';
 
 // Load Environment File
 dotenv.config({ quiet: true });
