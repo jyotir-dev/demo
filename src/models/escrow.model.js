@@ -12,10 +12,7 @@ const walletSchema = new mongoose.Schema({
         required: true,
         select: false
     }
-},
-    {
-        _id: false
-    });
+},  { _id: false });
 
 // Payout Schema
 const payoutSchema = new mongoose.Schema({
@@ -29,10 +26,7 @@ const payoutSchema = new mongoose.Schema({
     paidAt: {
         type: Date
     }
-},
-    {
-        _id: false
-    });
+},  { _id: false });
 
 // Escrow Schema
 const escrowSchema = new mongoose.Schema({
@@ -80,10 +74,7 @@ const escrowSchema = new mongoose.Schema({
         type: payoutSchema,
         default: undefined
     }
-},
-    {
-        timestamps: true
-    });
+},  { timestamps: true });
 
 // Escrow Model
 const Escrow = mongoose.model('Escrow', escrowSchema)

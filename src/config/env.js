@@ -1,5 +1,9 @@
 // Dependencies
 const { z } = require('zod');
+const dotenv = require('dotenv');
+
+// Load Environment File
+dotenv.config({ quiet: true });
 
 // Not Placeholder
 const notPlaceholder = (value) => !value.startsWith('replace-with');
@@ -32,4 +36,4 @@ if (!result.success) {
 const env = Object.freeze(result.data);
 
 // Export Environment
-module.exports = { env };
+module.exports = env;
