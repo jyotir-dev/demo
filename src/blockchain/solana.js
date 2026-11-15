@@ -19,7 +19,7 @@ const logger = require('../lib/logger');
 const encryption = require('../security/encryption');
 
 // Connection
-const connection = new Connection(env.SOLANA_RPC_URL, env.COMMITMENT);
+const connection = new Connection(env.SOLANA_RPC_URL, env.SOLANA_COMMITMENT);
 
 // To Lamports
 exports.toLamports = (sol) => BigInt(Math.round(sol * LAMPORTS_PER_SOL));
@@ -98,7 +98,7 @@ exports.transfer = async (encryptedPrivateKey, destination) => {
     }
 
     return sendAndConfirmTransaction(connection, buildTransaction(lamports), [sender], {
-        commitment: env.COMMITMENT,
+        commitment: env.SOLANA_COMMITMENT,
         maxRetries: 3
     });
 };
