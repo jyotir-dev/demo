@@ -11,9 +11,6 @@ import * as Token from '../security/token.js';
 // Mailers
 import * as authMailer from '../mailers/auth.mailer.js';
 
-// Serializers
-import * as userSerializer from '../serializers/user.serializer.js';
-
 // Errors
 import { BadRequestError, UnauthorizedError, ConflictError } from '../errors/http.errors.js';
 
@@ -61,7 +58,13 @@ export const signup = async (body) => {
         response: {
             success: true,
             message: 'Account created successfully.',
-            user: userSerializer.toAccount(user)
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                emailVerified: user.emailVerified,
+                createdAt: user.createdAt
+            }
         }
     };
 };
@@ -89,7 +92,13 @@ export const login = async (body) => {
         response: {
             success: true,
             message: 'Logged in successfully.',
-            user: userSerializer.toAccount(user)
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                emailVerified: user.emailVerified,
+                createdAt: user.createdAt
+            }
         }
     };
 };
@@ -99,7 +108,13 @@ export const me = async (user) => {
     return {
         response: {
             success: true,
-            user: userSerializer.toAccount(user)
+            user: {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                emailVerified: user.emailVerified,
+                createdAt: user.createdAt
+            }
         }
     };
 };
