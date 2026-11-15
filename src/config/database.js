@@ -1,5 +1,5 @@
 // Environment
-const env = require('./config/env');
+const env = require('./env');
 
 // Dependencies
 const mongoose = require('mongoose');

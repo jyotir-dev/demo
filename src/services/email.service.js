@@ -10,8 +10,8 @@ const logger = require('../lib/logger')
 // Transporter
 const transporter = nodemailer.createTransport({
     host: env.SMTP_HOST,
-    port: Number(env.SMTP_PORT),
-    secure: env.SMTP_PORT === '465',
+    port: env.SMTP_PORT,
+    secure: env.SMTP_PORT === 465,
     pool: true,
     connectionTimeout: 10000,
     socketTimeout: 20000,
