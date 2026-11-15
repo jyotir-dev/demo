@@ -43,7 +43,7 @@ app.use(logRequest());
 // Health Routes
 app.use('/api/health', healthRoutes);
 
-// API v1 Routes
+// API Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/escrow', escrowRoutes);
 
@@ -53,5 +53,5 @@ app.use(handleNotFound());
 // Error Handler
 app.use(handleError());
 
-// Export Express Application
+// Export Express App
 module.exports = app;

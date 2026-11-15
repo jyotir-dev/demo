@@ -1,7 +1,7 @@
 // Environment Variables
 require('dotenv').config();
 
-// Express Application
+// Express App
 const app = require('./app');
 
 // Logger

@@ -9,5 +9,5 @@ function catchAsync(handler) {
     };
 }
 
-// Export Utility
+// Export Catch Async
 module.exports = catchAsync;

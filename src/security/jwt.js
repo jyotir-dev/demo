@@ -1,6 +1,7 @@
 // Dependencies
 const jwt = require('jsonwebtoken');
 
+// Constants
 const TOKEN_TTL = 7 * 24 * 60 * 60;
 
 // Sign Token

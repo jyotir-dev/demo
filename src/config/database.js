@@ -14,8 +14,13 @@ const CONNECTION_OPTIONS = {
 mongoose.set('strictQuery', true);
 
 // Connection Events
-mongoose.connection.on('disconnected', () => logger.warn('DATABASE', 'Disconnected from MongoDB.'));
-mongoose.connection.on('reconnected', () => logger.success('DATABASE', 'Reconnected to MongoDB.'));
+mongoose.connection.on('disconnected', () => {
+    logger.warn('DATABASE', 'Disconnected from MongoDB.');
+});
+
+mongoose.connection.on('reconnected', () => {
+    logger.success('DATABASE', 'Reconnected to MongoDB.');
+});
 
 // Connect Database
 module.exports = async () => {
@@ -26,7 +31,7 @@ module.exports = async () => {
         await mongoose.connect(process.env.MONGO_URI, CONNECTION_OPTIONS);
         logger.success('DATABASE', `Connected to "${mongoose.connection.name}"`, `${Date.now() - start}ms`);
     } catch (error) {
-        logger.warn('DATABASE', `Failed to connect: ${error.message}`);
+        logger.error('DATABASE', `Failed to connect: ${error.message}`);
         throw error;
     }
 };
