@@ -1,15 +1,22 @@
 {
-  "printWidth": 120,
-  "tabWidth": 4,
-  "singleQuote": true,
-  "semi": true,
-  "trailingComma": "none",
-  "arrowParens": "always",
-  "endOfLine": "lf",
-  "overrides": [
-    {
-      "files": ["*.json", "*.md", "*.yml", "*.yaml"],
-      "options": { "tabWidth": 2 }
-    }
-  ]
+    "printWidth": 120,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "none",
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "overrides": [
+        {
+            "files": [
+                "*.json",
+                "*.md",
+                "*.yml",
+                "*.yaml"
+            ],
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
 }
