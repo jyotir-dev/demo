@@ -1,3 +1,6 @@
+// Environment
+const env = require('../config/env');
+
 // Cookie Name
 const COOKIE_NAME = 'token';
 

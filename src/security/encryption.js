@@ -1,12 +1,15 @@
 // Dependencies
 const crypto = require('crypto');
 
+// Environment
+const env = require('./config/env');
+
 // Settings
 const IV_LENGTH = 12;
 const VERSION = 'v1';
 const ALGORITHM = 'aes-256-gcm';
 
-const KEY = Buffer.from(process.env.ENCRYPTION_KEY, 'hex');
+const KEY = Buffer.from(env.ENCRYPTION_KEY, 'hex');
 
 // Encrypt
 exports.encrypt = (plaintext) => {

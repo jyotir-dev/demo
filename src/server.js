@@ -1,8 +1,8 @@
-// Environment Variables
-const env = require('./config/env');
-
 // Express App
 const app = require('./app');
+
+// Environment
+const env = require('./config/env');
 
 // Logger
 const logger = require('./lib/logger');

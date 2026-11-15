@@ -1,3 +1,6 @@
+// Environment
+const env = require('./config/env');
+
 // Dependencies
 const mongoose = require('mongoose');
 
@@ -28,7 +31,7 @@ module.exports = async () => {
     const start = Date.now();
 
     try {
-        await mongoose.connect(process.env.MONGO_URI, CONNECTION_OPTIONS);
+        await mongoose.connect(env.MONGO_URI, CONNECTION_OPTIONS);
         logger.success('DATABASE', `Connected to "${mongoose.connection.name}"`, `${Date.now() - start}ms`);
     } catch (error) {
         logger.error('DATABASE', `Failed to connect: ${error.message}`);

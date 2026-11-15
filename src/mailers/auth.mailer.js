@@ -1,3 +1,6 @@
+// Environment
+const env = require('./config/env');
+
 // Services
 const emailService = require('../services/email.service');
 
@@ -9,7 +12,7 @@ const verificationEmail = require('../emails/verification.email');
 // Send Verification Email
 exports.sendVerificationEmail = (user, rawToken) => {
 
-    const verificationURL = `${process.env.CLIENT_URL}/verify-email?token=${rawToken}`;
+    const verificationURL = `${env.CLIENT_URL}/verify-email?token=${rawToken}`;
 
     emailService.sendEmail({
         to: user.email,
@@ -20,7 +23,7 @@ exports.sendVerificationEmail = (user, rawToken) => {
 // Send Reset Email
 exports.sendResetEmail = (user, rawToken) => {
 
-    const resetURL = `${process.env.CLIENT_URL}/reset-password?token=${rawToken}`;
+    const resetURL = `${env.CLIENT_URL}/reset-password?token=${rawToken}`;
 
     emailService.sendEmail({
         to: user.email,
@@ -31,7 +34,7 @@ exports.sendResetEmail = (user, rawToken) => {
 // Send Security Email
 exports.sendSecurityEmail = (user) => {
 
-    const secureAccountURL = `${process.env.CLIENT_URL}/forgot-password`;
+    const secureAccountURL = `${env.CLIENT_URL}/forgot-password`;
 
     emailService.sendEmail({
         to: user.email,

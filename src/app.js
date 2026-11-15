@@ -4,6 +4,9 @@ const helmet = require('helmet');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
+// Environment
+const env = require('./config/env');
+
 // Routes
 const authRoutes = require('./routes/auth.routes');
 const escrowRoutes = require('./routes/escrow.routes');
@@ -18,7 +21,7 @@ const handleNotFound = require('./middlewares/notfound.middleware');
 const app = express();
 
 // Trust Proxy
-if (process.env.NODE_ENV === 'production') {
+if (env.NODE_ENV === 'production') {
     app.set('trust proxy', 1);
 }
 
@@ -33,7 +36,7 @@ app.use(cookieParser());
 
 // CORS Policy
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: env.CLIENT_URL,
     credentials: true
 }));
 
