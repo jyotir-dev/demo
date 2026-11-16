@@ -1,0 +1,12 @@
+chore: initial commit
+
+Kairo API v1.0.0, the backend for peer-to-peer escrow on Solana.
+
+- Express 5, MongoDB with Mongoose, ES modules, Node 24 or later
+- Environment validated with zod at startup, graceful shutdown
+- Auth: signup, login, logout, email verification, password change
+  and reset, JWT in an httpOnly cookie, bcrypt password hashing
+- Escrow: create, accept or deny, release and withdraw, with an
+  encrypted Solana wallet per escrow
+- Helmet, CORS, rate limits and hashed one-time tokens
+- Prettier and VS Code workspace settings
