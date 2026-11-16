@@ -1,3 +1,6 @@
+// Logger
+import * as logger from '../lib/logger.js';
+
 // Errors
 import ApiError from '../errors/api.error.js';
 
@@ -40,7 +43,8 @@ function handleError() {
             });
         }
 
-        console.error(`[ERROR] ${req.method} ${req.originalUrl}`, error);
+        const stack = error instanceof Error ? error.stack : String(error);
+        logger.error('REQUEST', `${req.method} ${req.originalUrl} ${req.id}`, stack);
 
         return res.status(500).json({
             success: false,

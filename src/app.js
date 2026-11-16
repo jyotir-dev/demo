@@ -15,6 +15,7 @@ import healthRoutes from './routes/health.routes.js';
 // Middlewares
 import logRequest from './middlewares/logger.middleware.js';
 import handleError from './middlewares/error.middleware.js';
+import requestId from './middlewares/requestid.middleware.js';
 import handleNotFound from './middlewares/notfound.middleware.js';
 
 // Express App
@@ -24,6 +25,9 @@ const app = express();
 if (env.NODE_ENV === 'production') {
     app.set('trust proxy', 1);
 }
+
+// Request ID
+app.use(requestId());
 
 // Security Headers
 app.use(helmet());

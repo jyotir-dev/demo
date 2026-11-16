@@ -34,8 +34,9 @@ function logRequest() {
             const urlText = req.originalUrl.padEnd(20);
             const statusText = colorize(getStatusColor(res.statusCode), res.statusCode);
             const durationText = colorize(ANSI.gray, `${duration.toFixed(2)}ms`);
+            const requestIdText = colorize(ANSI.gray, req.id);
 
-            console.log(`${timestamp} ${methodText} ${urlText} ${statusText} ${durationText}`);
+            console.log(`${timestamp} ${methodText} ${urlText} ${statusText} ${durationText} ${requestIdText}`);
         });
 
         next();
