@@ -170,7 +170,10 @@ export const changePassword = async (user, body) => {
 
     authMailer.sendSecurityEmail(updatedUser);
 
+    const token = JWT.signToken(updatedUser);
+
     return {
+        token,
         response: {
             success: true,
             message: 'Password changed successfully. Please log in again.'

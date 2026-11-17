@@ -37,7 +37,7 @@ export const logout = catchAsync(async (req, res) => {
 // Change Password
 export const changePassword = catchAsync(async (req, res) => {
     const result = await authService.changePassword(req.user, req.body);
-    authCookie.clearAuthCookie(res);
+    authCookie.setAuthCookie(res, result.token);
     res.status(200).json(result.response);
 });
 

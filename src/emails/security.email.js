@@ -16,14 +16,14 @@ const formatChangedAt = () =>
 const securityEmail = ({ user, secureAccountURL }) => ({
     subject: 'Your Kairo password was changed',
     ...renderEmail({
-        preheader: 'Your Kairo password was just changed and every device was signed out.',
+        preheader: 'Your Kairo password was just changed and every other device was signed out.',
         heading: 'Your password was changed',
         paragraphs: [
-            `Hi ${user.username}, the password for your Kairo account was just changed, and every device has been signed out.`
+            `Hi ${user.username}, the password for your Kairo account was just changed, and every other device has been signed out.`
         ],
         details: [
             ['Changed', formatChangedAt()],
-            ['Sessions', 'Signed out everywhere']
+            ['Sessions', 'Signed out on other devices']
         ],
         action: {
             label: 'Reset my password',
