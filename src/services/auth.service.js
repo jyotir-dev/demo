@@ -176,7 +176,7 @@ export const changePassword = async (user, body) => {
         token,
         response: {
             success: true,
-            message: 'Password changed successfully. Please log in again.'
+            message: 'Password changed successfully. Other devices have been signed out.'
         }
     };
 };
